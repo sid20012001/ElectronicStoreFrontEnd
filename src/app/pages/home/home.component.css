@@ -1,0 +1,21 @@
+.my-carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .picsum-img-wrapper {
+    position: relative;
+    height: 70vh; /* Set the height to 80% of the viewport height */
+    overflow: hidden;
+  }
+  
+  .carousel-img {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+  }

@@ -1,35 +1,65 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" routerLink="/">EasyCart</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-      aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/">Home</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" id="categoryDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Category
-          </a>
-          <div class="dropdown-menu" aria-labelledby="categoryDropdown">
-            <!-- Category items go here -->
-            <a class="dropdown-item">Category 1</a>
-            <a class="dropdown-item" >Category 2</a>
-            <a class="dropdown-item">Category 3</a>
+  <a class="navbar-brand" routerLink="/">EasyCart</a>
+
+  <div class="mobile">
+    <button mat-button [matMenuTriggerFor]="afterMenu" style="color: whitesmoke;">Menu</button>
+    <mat-menu #afterMenu="matMenu" xPosition="after">
+      <button mat-menu-item routerLink="/">Home</button>
+      <button mat-menu-item routerLink="/products">Products</button>
+      <button mat-menu-item (click)="cartclicked()">Cart</button>
+      <button mat-menu-item routerLink="/account">Account</button>
+    </mat-menu>
+  </div>
+
+  <div class="collapse navbar-collapse d-none" id="navbarCollapse">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/">Home</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link" id="categoryDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Category
+        </a>
+        <div class="dropdown-menu" aria-labelledby="categoryDropdown">
+          <!-- Category items go here -->
+          <div *ngFor="let category of categories">
+            <a class="dropdown-item" (click)="clickedCategory(category.cid)">
+              {{ category.cname }}
+            </a>
           </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/products">Products</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/cart">Cart</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/account">Account</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/products">Products</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="cartclicked()">Cart</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/account">Account</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<style>
+  .navbar-nav .nav-item:hover .dropdown-menu {
+    display: block;
+  }
+
+  @media (min-width: 4em) {
+    .mobile {
+      display: none;
+    }
+
+    .navbar-collapse {
+      display: none !important;
+    }
+  }
+
+  @media (max-width: 62em) {
+    .navbar-toggler {
+      display: none;
+    }
+  }
+</style>

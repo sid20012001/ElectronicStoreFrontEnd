@@ -1,0 +1,262 @@
+<!-- <head><script src="https://checkout.razorpay.com/v1/checkout.js"></script></head>
+
+
+
+<h1>Order Summary</h1>
+<div class="total">Total {{ total }}</div>
+<div class="cart-items" *ngFor="let item of cartItems">
+  <div>{{ item.pname }}</div>
+  <div>{{ item.price }}</div>
+</div>
+
+
+
+    
+
+<div class="address" *ngFor="let ad of address">
+  <div class="address-details">
+    <input type="radio" [value]="ad" name="selectedAddress" [(ngModel)]="selectedAddress">
+    <label for="selectedAddress">{{ ad.pinCode }}, {{ ad.houseName }}, {{ ad.street }}, {{ ad.landMark }}, {{ ad.city }}, {{ ad.district }}</label>
+    <br>
+    <button (click)="removeAddress(ad.addressId)" class="remove-address-btn">Remove Address</button>
+  </div>
+</div>
+
+<button class="add-address-btn" (click)="buyNow()">Buy Now!</button>
+<br>
+<br>
+<button class="add-address-btn" (click)="toggleAddressForm()">Add Address</button>
+<div *ngIf="showAddressForm" class="address-form">
+    <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="card mt-5">
+              <div class="card-header bg-light-gray text-dark">
+               Add New Address!!
+              </div>
+              <div class="card-body">
+                <form >
+                  <div class="form-group">
+                    <label for="pincode">Pincode</label>
+                    <input type="number" class="form-control" id="pincode" name="pincode" required placeholder="Enter your pincode" [(ngModel)]="newAddress.pinCode">
+                  </div>
+                  <div class="form-group">
+                    <label for="housename">House Name</label>
+                    <input type="text" class="form-control" id="housename" name="housename"  required placeholder="Enter your housename" [(ngModel)]="newAddress.houseName">
+                  </div>
+                  <div class="form-group">
+                    <label for="street">Street Name</label>
+                    <input type="text" class="form-control" id="street" name="street"  required placeholder="Enter  street name" [(ngModel)]="newAddress.street">
+                  </div>
+                  <div class="form-group">
+                    <label for="landmark">LandMark</label>
+                    <input type="text" class="form-control" id="landmark" name="landmark"  required placeholder="Enter any landmark " [(ngModel)]="newAddress.landMark">
+                  </div>
+                  <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" class="form-control" id="city" name="city"  required placeholder="Enter City name " [(ngModel)]="newAddress.city">
+                  </div>
+                  <div class="form-group">
+                    <label for="district">District</label>
+                    <input type="text" class="form-control" id="district" name="district"  required placeholder="Enter district " [(ngModel)]="newAddress.district">
+                  </div>
+                
+                </form>
+                <div style="text-align: center; ">
+                <button (click)="saveAddress()" style="background-color: rgb(35, 186, 35); width: 100%;">Save Address</button>
+               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      
+
+
+ 
+</div>
+ -->
+
+
+ <head>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+      /* Custom CSS styles */
+      .total {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+  
+      .cart-items {
+        margin-bottom: 20px;
+      }
+  
+      .address {
+        margin-bottom: 20px;
+      }
+  
+      .address-details {
+        margin-bottom: 10px;
+      }
+  
+      .remove-address-btn {
+        background-color: #f44336;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+  
+      .add-address-btn {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-bottom: 20px;
+      }
+  
+      .address-form {
+        margin-top: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        background-color: #f9f9f9;
+      }
+  
+      .card-header {
+        background-color: #f2f2f2;
+        padding: 10px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+  
+      .form-control {
+        margin-bottom: 10px;
+      }
+  
+      .save-address-btn {
+        background-color: #23ba23;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      .order-summary {
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+  }
+
+  .order-summary h1 {
+    margin-bottom: 10px;
+  }
+
+  .total {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .cart-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .cart-item-number {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+
+  .cart-item-details {
+    margin-left: 10px;
+  }
+    </style>
+  </head>
+  <div class="order-summary">
+    <h1>Order Summary</h1>
+    <div class="total">Total {{ total }}</div>
+  
+    <div class="cart-items">
+      <div class="cart-item" *ngFor="let item of cartItems; let i = index">
+        <div class="cart-item-number">{{ i + 1 }}</div>
+        <div class="cart-item-details">
+          <div>{{ item.pname }}</div>
+          <div>{{ item.price }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="address" *ngFor="let ad of address">
+    <div class="address-details">
+      <input type="radio" [value]="ad" name="selectedAddress" [(ngModel)]="selectedAddress">
+      <label for="selectedAddress">
+        {{ ad.pinCode }}, {{ ad.houseName }}, {{ ad.street }}, {{ ad.landMark }}, {{ ad.city }}, {{ ad.district }}
+      </label>
+      <br>
+      <button (click)="removeAddress(ad.addressId)" class="remove-address-btn">Remove Address</button>
+    </div>
+  </div>
+  
+  <button class="add-address-btn" (click)="buyNow()">Buy Now!</button>
+  <br>
+  <br>
+  <button class="add-address-btn" (click)="toggleAddressForm()">Add Address</button>
+  
+  <div *ngIf="showAddressForm" class="address-form">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card mt-5">
+            <div class="card-header bg-light-gray text-dark">
+              Add New Address!!
+            </div>
+            <div class="card-body">
+              <form>
+                <div class="form-group">
+                  <label for="pincode">Pincode</label>
+                  <input type="number" class="form-control" id="pincode" name="pincode" required placeholder="Enter your pincode" [(ngModel)]="newAddress.pinCode">
+                </div>
+                <div class="form-group">
+                  <label for="housename">House Name</label>
+                  <input type="text" class="form-control" id="housename" name="housename" required placeholder="Enter your housename" [(ngModel)]="newAddress.houseName">
+                </div>
+                <div class="form-group">
+                  <label for="street">Street Name</label>
+                  <input type="text" class="form-control" id="street" name="street" required placeholder="Enter street name" [(ngModel)]="newAddress.street">
+                </div>
+                <div class="form-group">
+                  <label for="landmark">LandMark</label>
+                  <input type="text" class="form-control" id="landmark" name="landmark" required placeholder="Enter any landmark" [(ngModel)]="newAddress.landMark">
+                </div>
+                <div class="form-group">
+                  <label for="city">City</label>
+                  <input type="text" class="form-control" id="city" name="city" required placeholder="Enter City name" [(ngModel)]="newAddress.city">
+                </div>
+                <div class="form-group">
+                  <label for="district">District</label>
+                  <input type="text" class="form-control" id="district" name="district" required placeholder="Enter district" [(ngModel)]="newAddress.district">
+                </div>
+              </form>
+              <div style="text-align: center;">
+                <button (click)="saveAddress()" class="save-address-btn">Save Address</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

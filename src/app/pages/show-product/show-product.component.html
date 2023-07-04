@@ -1,1 +1,34 @@
-<p>show-product works!</p>
+<div style="display: flex; justify-content: center; margin-bottom: 20px;">
+  <li class="nav-item">
+    <form class="form-inline my-2 my-lg-0" (ngSubmit)="filterProducts(val.value)">
+      <input #val class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchKey">
+      <button style="background-color: #888d93;" class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </li>
+</div>
+
+<h2 style="text-align: center;">All Products</h2>
+
+<!-- Product cards -->
+<div class="container mt-4">
+  <div class="row">
+    <div *ngFor="let product of filteredProducts" class="col-md-4 mb-4">
+      <!-- Card details -->
+      <div class="card">
+        <!-- Card image -->
+        <div class="card-img-top" style="text-align: center;">
+          <img style="max-width: 200px; max-height: 200px; min-height: 200px;" src="{{ product.url }}" alt="Product Image" class="img-fluid">
+        </div>
+        <!-- Card body -->
+        <div class="card-body" style="text-align: center;">
+          <h5 class="card-title">{{ product.pname }}</h5>
+          <h5 class="card-title">Price {{ product.price }}</h5>
+          <p class="card-text">{{ product.pdescription }}</p>
+          <p class="card-text">Discount {{ product.discount }}%</p>
+          <button (click)="addToCart(product)" class="btn btn-primary" style="margin-right:5px;background-color: #888d93;">Add to Cart</button>
+          <a  (click)="addToCart(product)" class="btn btn-primary" style="background-color: #212529;">Buy Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
